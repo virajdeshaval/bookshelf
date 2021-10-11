@@ -32,10 +32,14 @@ class FormView extends Component {
       crossDomain: true,
       success: (result) => {
         document.getElementById("add-book-form").reset();
+        window.location.reload();
         return;
       },
       error: (error) => {
-        alert('Unable to add book. Please try your request again')
+        if ((this.state.title).length == 0 ||  (this.state.author).length == 0) {
+          alert('Please provide title and Author Name. Unable to add book. Please try your request again')
+        }
+        // alert('Unable to add book. Please try your request again')
         return;
       }
     })
