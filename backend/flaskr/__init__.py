@@ -138,13 +138,29 @@ def create_app(test_config=None):
 	#        Response body keys: 'success', 'created'(id of created book), 'books' and 'total_books'
 	# TEST: When completed, you will be able to a new book using the form. Try doing so from the last page of books. 
 	#       Your new book should show up immediately after you submit it at the end of the page. 
-	@app.errorhandler(400)
+	@app.errorhandler(404)
 	def not_found(error):
 		return jsonify({
-			'success': False,
-			'error': 400,
-			'message': "Books not found"
-		})
+			"success": False, 
+			"error": 404,
+			"message": "resource not found"
+			}), 404
+
+	@app.errorhandler(422)
+	def unprocessable(error):
+		return jsonify({
+			"success": False,
+			"error": 422,
+			"message": "unprocessable"
+			}), 422
+
+	@app.errorhandler(400)
+	def bad_request(error):
+		return jsonify({
+			"success": False, 
+			"error": 400,
+			"message": "bad request"
+			}), 400
 	return app
 
     
