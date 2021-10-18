@@ -29,7 +29,7 @@ def retrieve_books():
 	formatted_books = paginate_books(request, books)
 	
 	if not formatted_books:
-		abort(400)
+		abort(404)
 	else:
 		return jsonify({
 			'success': True,
@@ -40,13 +40,34 @@ def retrieve_books():
 
 def add_books():
 	body = request.get_json()
-
+	search = body.get('search', None)
 	try:
 		if (not body["title"]) or (not body["author"]):
 			abort(406)
-		book = Book(title=body["title"], author=body["author"], rating=body["rating"])
-		book.insert()
-		return retrieve_books()
+		
+		if search:
+			selection = Book.query.order_by(Book.id).filter(Book.title.ilike('%{}%'.format(search)))
+			current_books = paginate_books(request, selection)
+
+			return jsonify({
+				'success': True,
+				'books': current_books,
+				'total_books': len(selection.all())
+			})
+		else:
+			book = Book(title=body["title"], author=body["author"], rating=body["rating"])
+			book.insert()
+			selection = Book.query.order_by(Book.id).all()
+			current_books = paginate_books(request, selection)
+
+			return jsonify({
+				'success': True,
+				'created': book.id,
+				'books': current_books,
+				'total_books': len(Book.query.all())
+			})
+
+		# return retrieve_books()
 	except:
 		abort(422)
 
@@ -58,7 +79,7 @@ def update_books(book_id):
 		book = Book.query.filter(Book.id == book_id).one_or_none()
 		
 		if book is None:
-			abort(404)
+			abort(400)
 		
 		if 'rating' in body:
 			book.rating = int(body["rating"])
@@ -83,10 +104,17 @@ def delete_books(book_id):
 			abort(404)
 		
 		book.delete()
+		selection = Book.query.order_by(Book.id).all()
+		current_books = paginate_books(request, selection)
 
-		return retrieve_books()
+		return jsonify({
+			'success': True,
+			'deleted': book_id,
+			'books': current_books,
+			'total_books': len(Book.query.all())
+		})
 	except:
-		abort(400)
+		abort(422)
 
 def create_app(test_config=None):
 	# create and configure the app
@@ -161,6 +189,22 @@ def create_app(test_config=None):
 			"error": 400,
 			"message": "bad request"
 			}), 400
+	
+	@app.errorhandler(406)
+	def bad_request(error):
+		return jsonify({
+			"success": False, 
+			"error": 406,
+			"message": "not acceptable"
+			}), 406
+
+	@app.errorhandler(405)
+	def bad_request(error):
+		return jsonify({
+			"success": False, 
+			"error": 405,
+			"message": "method not allowed"
+			}), 405
+	
 	return app
 
-    

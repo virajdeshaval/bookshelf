@@ -1,27 +1,22 @@
 import os
 import unittest
 import json
+from flask_sqlalchemy import SQLAlchemy
 
 from flaskr import create_app
 from models import setup_db, Book
-from flask_sqlalchemy import SQLAlchemy
 
 class BookTestCase(unittest.TestCase):
-    """This class represents the Bookshelf test case"""
+    """This class represents the trivia test case"""
 
     def setUp(self):
-        # Created app
+        """Define test variables and initialize app."""
         self.app = create_app()
-        # Setup client
         self.client = self.app.test_client
-        # Set database name. Use different database for test so we never
-        # manipulate PROD data
         self.database_name = "bookshelf_test"
         self.database_path = "postgres://{}:{}@{}/{}".format('student', 'student','localhost:5432', self.database_name)
-        # Create a database setup
         setup_db(self.app, self.database_path)
 
-        # Create new book object
         self.new_book = {
             'title': 'Anansi Boys',
             'author': 'Neil Gaiman',
@@ -34,52 +29,63 @@ class BookTestCase(unittest.TestCase):
             self.db.init_app(self.app)
             # create all tables
             self.db.create_all()
-
+    
     def tearDown(self):
-        """Executed after each test"""
+        """Executed after reach test"""
         pass
 
-    # 'name' is important
-    # 1. starts with test
-    # 2. followed by method name
-    # 3. books should be paginated so, 'paginated_books'
-    def test_get_paginated_books(self):
-        # save response by using the client to get the endpoint
+# @TODO: Write at least two tests for each endpoint - one each for success and error behavior.
+#        You can feel free to write additional tests for nuanced functionality,
+#        Such as adding a book without a rating, etc. 
+#        Since there are four routes currently, you should have at least eight tests. 
+# Optional: Update the book information in setUp to make the test database your own! 
+    def test_get_books(self):
         res = self.client().get('/books')
-        # load the data using json.loads
+        # get the data into json format
         data = json.loads(res.data)
 
-        # Few things to be checked now.
-        # 1. status_code = 200
-        # 2. Success value of body = True
-        # 3. Use assert true to check if there are total_books in data
-        # 4. Use assert true to check if there are books in list
+        # Add assertions
         self.assertEqual(res.status_code, 200)
-        self.assertEqual(data['success'], True)
-        self.assertTrue(data['total_books'])
-        self.assertTrue(len(data['books']))
-    
-    # I want to test '404 is sent beyond a valid page
+        self.assertTrue(data['success'], "The result is False")
+        self.assertTrue(data['total_books'], "The result is False")
+        self.assertIsNotNone(data['books'], "The result is False")
+
     def test_404_sent_requesting_beyond_valid_page(self):
-        res = self.client().get('/books?page=1000', json={'rating': 1})
+        res = self.client().get('/books?page=1000')
         data = json.loads(res.data)
-        
+
         self.assertEqual(res.status_code, 404)
         self.assertEqual(data['success'], False)
         self.assertEqual(data['message'], 'resource not found')
-
-
-    def test_update_book_rating(self):
-        res = self.client().patch('/books/8', json={'rating': 1})
+    
+    def test_get_book_search_with_results(self):
+        res = self.client().post('/books', json={'search': 'boys'})
         data = json.loads(res.data)
 
-        # get the book with id = 8, to check it's rating
+        self.assertEqual(res.status_code, 200)
+        self.assertEqual(data['success'], True)
+        self.assertTrue(data['total_books'])
+        self.assertEqual(len(data['books']), 4)
+
+    def test_get_book_search_without_results(self):
+        res = self.client().post('/books', json={'search': 'applejacks'})
+        data = json.loads(res.data)
+
+        self.assertEqual(res.status_code, 200)
+        self.assertEqual(data['success'], True)
+        self.assertTrue(data['total_books'], 0)
+        self.assertEqual(len(data['books']), 0)
+
+    def test_update_book_rating(self):
+        res = self.client().patch('/books/8', json={'rating': 5})
+        data = json.loads(res.data)
+
+        # get the book with id = 8, to check it's rating        
         book = Book.query.filter(Book.id == 8).one_or_none()
 
         self.assertEqual(res.status_code, 200)
         self.assertEqual(data['success'], True)
-        self.assertEqual(book.format()['rating'], 1)
-        
+        self.assertEqual(book.format()['rating'], 5)
 
     def test_400_for_failed_update(self):
         res = self.client().patch('/books/8')
@@ -88,18 +94,20 @@ class BookTestCase(unittest.TestCase):
         self.assertEqual(res.status_code, 400)
         self.assertEqual(data['success'], False)
         self.assertEqual(data['message'], 'bad request')
-    
+
     def test_delete_book(self):
-        res = self.client().delete('/books/10')
+        res = self.client().delete('/books/16')
         data = json.loads(res.data)
 
-        book = Book.query.filter(Book.id == 10).one_or_none()
+        # try to get the book you deleted
+        book = Book.query.filter(Book.id == 16).one_or_none()
 
         self.assertEqual(res.status_code, 200)
         self.assertEqual(data['success'], True)
-        self.assertEqual(data['deleted'], 10)
+        self.assertEqual(data['deleted'], 16)
         self.assertTrue(data['total_books'])
         self.assertTrue(len(data['books']))
+        # to verify that book you deleted is no longer exists
         self.assertEqual(book, None)
         
 
@@ -110,24 +118,23 @@ class BookTestCase(unittest.TestCase):
         self.assertEqual(res.status_code, 422)
         self.assertEqual(data['success'], False)
         self.assertEqual(data['message'], 'unprocessable')
-    
+
     def test_create_new_book(self):
-        res = self.client().post('/books', json=self.new_book)
+        res = self.client().post('/books', json=self.new_book)        
         data = json.loads(res.data)
-        
+
         self.assertEqual(res.status_code, 200)
         self.assertEqual(data['success'], True)
         self.assertTrue(data['created'])
         self.assertTrue(len(data['books']))
-    
-    # def test_405_if_book_creation_not_allowed(self):
-    #     res = self.client().post('/books/45', json=self.new_book)
-    #     data = json.loads(res.data)
 
-    #     self.assertEqual(res.status_code, 405)
-    #     self.assertEqual(data['success'], False)
-    #     self.assertEqual(data['message'], 'method not allowed')
+    def test_405_if_book_creation_not_allowed(self):
+        res = self.client().post('/books/45', json=self.new_book)        
+        data = json.loads(res.data)
 
+        self.assertEqual(res.status_code, 405)
+        self.assertEqual(data['success'], False)
+        self.assertEqual(data['message'], 'method not allowed')
 
 # Make the tests conveniently executable
 if __name__ == "__main__":
