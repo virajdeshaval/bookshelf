@@ -41,10 +41,8 @@ def retrieve_books():
 def add_books():
 	body = request.get_json()
 	search = body.get('search', None)
-	try:
-		if (not body["title"]) or (not body["author"]):
-			abort(406)
-		
+
+	try:		
 		if search:
 			selection = Book.query.order_by(Book.id).filter(Book.title.ilike('%{}%'.format(search)))
 			current_books = paginate_books(request, selection)
@@ -55,6 +53,8 @@ def add_books():
 				'total_books': len(selection.all())
 			})
 		else:
+			if (not body["title"]) or (not body["author"]):
+				abort(406)
 			book = Book(title=body["title"], author=body["author"], rating=body["rating"])
 			book.insert()
 			selection = Book.query.order_by(Book.id).all()
