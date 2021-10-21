@@ -7,10 +7,11 @@ from flaskr import create_app
 from models import setup_db, Book
 
 class BookTestCase(unittest.TestCase):
-    """This class represents the trivia test case"""
+    """This class represents the Bookshelf test case"""
 
     def setUp(self):
         """Define test variables and initialize app."""
+        """Create an app"""
         self.app = create_app()
         self.client = self.app.test_client
         self.database_name = "bookshelf_testing"
