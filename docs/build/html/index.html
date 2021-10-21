@@ -1,0 +1,428 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>The Exceptional Bookshelf for House &#8212; new-bookshelf v1.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="the-exceptional-bookshelf-for-house">
+<h1>The Exceptional Bookshelf for House<a class="headerlink" href="#the-exceptional-bookshelf-for-house" title="Permalink to this headline">¶</a></h1>
+<p>This project is a virtual bookshelf for any House.</p>
+<p><code class="docutils literal notranslate"><span class="pre">I</span> <span class="pre">LOVE</span> <span class="pre">to</span> <span class="pre">read</span> <span class="pre">my</span> <span class="pre">books</span> <span class="pre">and</span> <span class="pre">rate</span> <span class="pre">them</span> <span class="pre">as</span> <span class="pre">per</span> <span class="pre">my</span> <span class="pre">interest.</span> <span class="pre">This</span> <span class="pre">is</span> <span class="pre">an</span> <span class="pre">intresting</span> <span class="pre">way</span> <span class="pre">to</span> <span class="pre">just</span> <span class="pre">do</span> <span class="pre">that.</span></code></p>
+<p>You can, - add your books to the bookshelf, - give a rating, - update
+the rating and - search through book lists.</p>
+<p>API is organized by resource and it sends out
+<a class="reference external" href="https://www.json.org/json-en.html">JSON</a> based responses and uses
+HTTP response codes.</p>
+<p>All backend code follows <a class="reference external" href="https://www.python.org/dev/peps/pep-0008/">PEP8 style
+guidelines</a>.</p>
+<section id="developer-guidelines">
+<h2>Developer Guidelines<a class="headerlink" href="#developer-guidelines" title="Permalink to this headline">¶</a></h2>
+<p>You should feel free to expand on the project in any way you can dream
+up to extend the functionality. For instance, you could add additional
+book information to each entry or create individual book views including
+more information about the book, your thoughts or when you completed it.</p>
+</section>
+<section id="getting-started">
+<h2>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h2>
+<section id="pre-requisites-and-local-development">
+<h3>Pre-requisites and Local Development<a class="headerlink" href="#pre-requisites-and-local-development" title="Permalink to this headline">¶</a></h3>
+<p>Developers using this project should already have Python3, pip and node
+installed on their local machines.</p>
+<section id="backend">
+<h4>Backend<a class="headerlink" href="#backend" title="Permalink to this headline">¶</a></h4>
+<ol class="arabic">
+<li><p><strong>Python 3.7</strong> - Follow instructions to install the latest version of
+python for your platform in the <a class="reference external" href="https://docs.python.org/3/using/unix.html#getting-and-installing-the-latest-version-of-python">python
+docs</a></p></li>
+<li><p><strong>Virtual Enviornment</strong> - We recommend working within a virtual
+environment whenever using Python for projects. This keeps your
+dependencies for each project separate and organaized. Instructions
+for setting up a virual enviornment for your platform can be found in
+the <a class="reference external" href="https://packaging.python.org/guides/installing-using-pip-and-virtual-environments/">python
+docs</a></p></li>
+<li><p><strong>PIP Dependencies</strong> - Once you have your virtual environment setup
+and running, install dependencies by naviging to the <code class="docutils literal notranslate"><span class="pre">/backend</span></code>
+directory and running:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install -r requirements.txt
+</pre></div>
+</div>
+<p>This will install all of the required packages we selected within the
+<code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code> file.</p>
+</li>
+<li><p><strong>Key Dependencies</strong></p></li>
+</ol>
+<ul class="simple">
+<li><p><a class="reference external" href="http://flask.pocoo.org/">Flask</a> is a lightweight backend
+microservices framework. Flask is required to handle requests and
+responses.</p></li>
+<li><p><a class="reference external" href="https://www.sqlalchemy.org/">SQLAlchemy</a> is the Python SQL
+toolkit and ORM we’ll use handle the lightweight sqlite database.
+You’ll primarily work in app.py and can reference models.py.</p></li>
+<li><p><a class="reference external" href="https://flask-cors.readthedocs.io/en/latest/#">Flask-CORS</a> is the
+extension we’ll use to handle cross origin requests from our frontend
+server.</p></li>
+</ul>
+<p>To run the application run the following commands:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">export</span> <span class="n">FLASK_APP</span><span class="o">=</span><span class="n">flaskr</span>
+<span class="n">export</span> <span class="n">FLASK_ENV</span><span class="o">=</span><span class="n">development</span>
+<span class="n">flask</span> <span class="n">run</span>
+</pre></div>
+</div>
+<p>These commands put the application in development and directs our
+application to use the <code class="docutils literal notranslate"><span class="pre">__init__.py</span></code> file in our flaskr folder.
+Working in development mode shows an interactive debugger in the console
+and restarts the server whenever changes are made. If running locally on
+Windows, look for the commands in the <a class="reference external" href="http://flask.pocoo.org/docs/1.0/tutorial/factory/">Flask
+documentation</a>.</p>
+<p>The application is run on <code class="docutils literal notranslate"><span class="pre">http://127.0.0.1:5000/</span></code> by default and is a
+proxy in the frontend configuration.</p>
+</section>
+<section id="frontend">
+<h4>Frontend<a class="headerlink" href="#frontend" title="Permalink to this headline">¶</a></h4>
+<p>From the frontend folder, run the following commands to start the
+client:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">npm</span> <span class="n">install</span> <span class="o">//</span> <span class="n">only</span> <span class="n">once</span> <span class="n">to</span> <span class="n">install</span> <span class="n">dependencies</span>
+<span class="n">npm</span> <span class="n">start</span>
+</pre></div>
+</div>
+<p>By default, the frontend will run on localhost:3000.</p>
+</section>
+</section>
+<section id="tests">
+<h3>Tests<a class="headerlink" href="#tests" title="Permalink to this headline">¶</a></h3>
+<p>In order to run tests navigate to the backend folder and run the
+following commands:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">dropdb</span> <span class="n">bookshelf_test</span>
+<span class="n">createdb</span> <span class="n">bookshelf_test</span>
+<span class="n">psql</span> <span class="n">bookshelf_test</span> <span class="o">&lt;</span> <span class="n">books</span><span class="o">.</span><span class="n">psql</span>
+<span class="n">python</span> <span class="n">test_flaskr</span><span class="o">.</span><span class="n">py</span>
+</pre></div>
+</div>
+<p>The first time you run the tests, omit the dropdb command.</p>
+<p>All tests are kept in that file and should be maintained as updates are
+made to app functionality.</p>
+</section>
+</section>
+<section id="api-reference">
+<h2>API Reference<a class="headerlink" href="#api-reference" title="Permalink to this headline">¶</a></h2>
+<section id="id1">
+<h3>Getting Started<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Base URL: At present this app can only be run locally and is not
+hosted as a base URL. The backend app is hosted at the default,
+<code class="docutils literal notranslate"><span class="pre">http://127.0.0.1:5000/</span></code>, which is set as a proxy in the frontend
+configuration.</p></li>
+<li><p>Authentication: This version of the application does not require
+authentication or API keys.</p></li>
+</ul>
+</section>
+<section id="error-handling">
+<h3>Error Handling<a class="headerlink" href="#error-handling" title="Permalink to this headline">¶</a></h3>
+<p>Errors are returned as JSON objects in the following format:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="mi">400</span><span class="p">,</span>
+    <span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;bad request&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The API will return five error types when requests fail: - 400 - Bad
+Request: Book ID is not available in database to update rating - 404 -
+Resource Not Found: Request resource does not exists - 405 - method not
+allowed: Method is not allowed on <code class="docutils literal notranslate"><span class="pre">GET</span></code> resource - 406 - Not
+acceptable: Please provide the values in mandatory fields - 422 - Not
+Processable: Your <code class="docutils literal notranslate"><span class="pre">POST</span></code> request cannot be processed</p>
+</section>
+<section id="endpoints">
+<h3>Endpoints<a class="headerlink" href="#endpoints" title="Permalink to this headline">¶</a></h3>
+<section id="get-books">
+<h4>GET /books<a class="headerlink" href="#get-books" title="Permalink to this headline">¶</a></h4>
+<ul>
+<li><p>General:</p>
+<ul class="simple">
+<li><p>Returns a list of book objects, success value, and total number of
+books</p></li>
+<li><p>Results are paginated in groups of 8. Include a request argument
+to choose page number, starting from 1.</p></li>
+</ul>
+</li>
+<li><p>Sample: <code class="docutils literal notranslate"><span class="pre">curl</span> <span class="pre">http://127.0.0.1:5000/books</span></code></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+   <span class="s2">&quot;books&quot;</span><span class="p">:</span> <span class="p">[</span>
+      <span class="p">{</span>
+         <span class="s2">&quot;author&quot;</span><span class="p">:</span> <span class="s2">&quot;Stephen King&quot;</span><span class="p">,</span>
+         <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+         <span class="s2">&quot;rating&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+         <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;The Outsider: A Novel&quot;</span>
+         <span class="p">},</span>
+      <span class="p">{</span>
+         <span class="s2">&quot;author&quot;</span><span class="p">:</span> <span class="s2">&quot;Lisa Halliday&quot;</span><span class="p">,</span>
+         <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+         <span class="s2">&quot;rating&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+         <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;Asymmetry: A Novel&quot;</span>
+         <span class="p">},</span>
+      <span class="p">{</span>
+         <span class="s2">&quot;author&quot;</span><span class="p">:</span> <span class="s2">&quot;Kristin Hannah&quot;</span><span class="p">,</span>
+         <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+         <span class="s2">&quot;rating&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+         <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;The Great Alone&quot;</span>
+         <span class="p">},</span>
+      <span class="p">{</span>
+         <span class="s2">&quot;author&quot;</span><span class="p">:</span> <span class="s2">&quot;Tara Westover&quot;</span><span class="p">,</span>
+         <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+         <span class="s2">&quot;rating&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+         <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;Educated: A Memoir&quot;</span>
+         <span class="p">},</span>
+      <span class="p">{</span>
+         <span class="s2">&quot;author&quot;</span><span class="p">:</span> <span class="s2">&quot;Jojo Moyes&quot;</span><span class="p">,</span>
+         <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+         <span class="s2">&quot;rating&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+         <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;Still Me: A Novel&quot;</span>
+         <span class="p">},</span>
+      <span class="p">{</span>
+         <span class="s2">&quot;author&quot;</span><span class="p">:</span> <span class="s2">&quot;Leila Slimani&quot;</span><span class="p">,</span>
+         <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span>
+         <span class="s2">&quot;rating&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+         <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;Lullaby&quot;</span>
+         <span class="p">},</span>
+      <span class="p">{</span>
+         <span class="s2">&quot;author&quot;</span><span class="p">:</span> <span class="s2">&quot;Amitava Kumar&quot;</span><span class="p">,</span>
+         <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span>
+         <span class="s2">&quot;rating&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+         <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;Immigrant, Montana&quot;</span>
+         <span class="p">},</span>
+      <span class="p">{</span>
+         <span class="s2">&quot;author&quot;</span><span class="p">:</span> <span class="s2">&quot;Madeline Miller&quot;</span><span class="p">,</span>
+         <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+         <span class="s2">&quot;rating&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+         <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;CIRCE&quot;</span>
+         <span class="p">}</span>
+   <span class="p">],</span>
+   <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+   <span class="s2">&quot;total_books&quot;</span><span class="p">:</span> <span class="mi">18</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</section>
+<section id="post-books">
+<h4>POST /books<a class="headerlink" href="#post-books" title="Permalink to this headline">¶</a></h4>
+<ul>
+<li><p>General:</p>
+<ul class="simple">
+<li><p>Creates a new book using the submitted title, author and rating.
+Returns the id of the created book, success value, total books,
+and book list based on current page number to update the frontend.</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">curl</span> <span class="pre">http://127.0.0.1:5000/books?page=3</span> <span class="pre">-X</span> <span class="pre">POST</span> <span class="pre">-H</span> <span class="pre">&quot;Content-Type:</span> <span class="pre">application/json&quot;</span> <span class="pre">-d</span> <span class="pre">'{&quot;title&quot;:&quot;Neverwhere&quot;,</span> <span class="pre">&quot;author&quot;:&quot;Neil</span> <span class="pre">Gaiman&quot;,</span> <span class="pre">&quot;rating&quot;:&quot;5&quot;}'</span></code></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s2">&quot;books&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="s2">&quot;author&quot;</span><span class="p">:</span> <span class="s2">&quot;Neil Gaiman&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">24</span><span class="p">,</span>
+      <span class="s2">&quot;rating&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+      <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;Neverwhere&quot;</span>
+    <span class="p">}</span>
+  <span class="p">],</span>
+  <span class="s2">&quot;created&quot;</span><span class="p">:</span> <span class="mi">24</span><span class="p">,</span>
+  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">&quot;total_books&quot;</span><span class="p">:</span> <span class="mi">17</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</section>
+<section id="delete-books-book-id">
+<h4>DELETE <code class="docutils literal notranslate"><span class="pre">/books/{book\_id}</span></code><a class="headerlink" href="#delete-books-book-id" title="Permalink to this headline">¶</a></h4>
+<ul>
+<li><p>General:</p>
+<ul class="simple">
+<li><p>Deletes the book of the given ID if it exists. Returns the id of
+the deleted book, success value, total books, and book list based
+on current page number to update the frontend.</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">curl</span> <span class="pre">-X</span> <span class="pre">DELETE</span> <span class="pre">http://127.0.0.1:5000/books/16?page=2</span></code></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s2">&quot;books&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="s2">&quot;author&quot;</span><span class="p">:</span> <span class="s2">&quot;Gina Apostol&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">9</span><span class="p">,</span>
+      <span class="s2">&quot;rating&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+      <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;Insurrecto: A Novel&quot;</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+      <span class="s2">&quot;author&quot;</span><span class="p">:</span> <span class="s2">&quot;Tayari Jones&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+      <span class="s2">&quot;rating&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+      <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;An American Marriage&quot;</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+      <span class="s2">&quot;author&quot;</span><span class="p">:</span> <span class="s2">&quot;Jordan B. Peterson&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">11</span><span class="p">,</span>
+      <span class="s2">&quot;rating&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+      <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;12 Rules for Life: An Antidote to Chaos&quot;</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+      <span class="s2">&quot;author&quot;</span><span class="p">:</span> <span class="s2">&quot;Kiese Laymon&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">12</span><span class="p">,</span>
+      <span class="s2">&quot;rating&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;Heavy: An American Memoir&quot;</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+      <span class="s2">&quot;author&quot;</span><span class="p">:</span> <span class="s2">&quot;Emily Giffin&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">13</span><span class="p">,</span>
+      <span class="s2">&quot;rating&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+      <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;All We Ever Wanted&quot;</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+      <span class="s2">&quot;author&quot;</span><span class="p">:</span> <span class="s2">&quot;Jose Andres&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">14</span><span class="p">,</span>
+      <span class="s2">&quot;rating&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+      <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;We Fed an Island&quot;</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+      <span class="s2">&quot;author&quot;</span><span class="p">:</span> <span class="s2">&quot;Rachel Kushner&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">15</span><span class="p">,</span>
+      <span class="s2">&quot;rating&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;The Mars Room&quot;</span>
+    <span class="p">}</span>
+  <span class="p">],</span>
+  <span class="s2">&quot;deleted&quot;</span><span class="p">:</span> <span class="mi">16</span><span class="p">,</span>
+  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">&quot;total_books&quot;</span><span class="p">:</span> <span class="mi">15</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</section>
+<section id="patch-books-book-id">
+<h4>PATCH /books/{book_id}<a class="headerlink" href="#patch-books-book-id" title="Permalink to this headline">¶</a></h4>
+<ul>
+<li><p>General:</p>
+<ul class="simple">
+<li><p>If provided, updates the rating of the specified book. Returns the
+success value and id of the modified book.</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">curl</span> <span class="pre">http://127.0.0.1:5000/books/15</span> <span class="pre">-X</span> <span class="pre">PATCH</span> <span class="pre">-H</span> <span class="pre">&quot;Content-Type:</span> <span class="pre">application/json&quot;</span> <span class="pre">-d</span> <span class="pre">'{&quot;rating&quot;:&quot;1&quot;}'</span></code></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">15</span><span class="p">,</span>
+  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</section>
+</section>
+</section>
+<section id="deployment-n-a">
+<h2>Deployment N/A<a class="headerlink" href="#deployment-n-a" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="authors">
+<h2>Authors<a class="headerlink" href="#authors" title="Permalink to this headline">¶</a></h2>
+<p>Yours truly, Viraj Deshaval</p>
+</section>
+<section id="acknowledgements">
+<h2>Acknowledgements<a class="headerlink" href="#acknowledgements" title="Permalink to this headline">¶</a></h2>
+<p>The awesome team at Udacity helped me to learn this Documentation skill,
+soon to be full stack extraordinaires!</p>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="#">new-bookshelf</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="#">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2021, Viraj Deshaval.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.2.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/index.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
