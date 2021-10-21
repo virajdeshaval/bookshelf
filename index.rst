@@ -146,7 +146,8 @@ Errors are returned as JSON objects in the following format:
         "message": "bad request"
     }
 
-The API will return five error types when requests fail: 
+The API will return five error types when requests fail:
+
 -  400 --> Bad Request: Book ID is not available in database to update rating 
 -  404 --> Resource Not Found: Request resource does not exists 
 -  405 --> method not allowed: Method is not allowed on ``GET`` resource 
