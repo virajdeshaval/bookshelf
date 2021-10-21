@@ -147,6 +147,7 @@ Errors are returned as JSON objects in the following format:
     }
 
 The API will return five error types when requests fail:
+
 ::
 
     400: Bad Request: Book ID is not available in database to update rating 
