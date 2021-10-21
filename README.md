@@ -8,7 +8,7 @@ You can,
 - add your books to the bookshelf, 
 - give a rating, 
 - update the rating and 
-- search through book lists. 
+- search through book lists.
 
 API is organized by resource and it sends out [JSON](https://www.json.org/json-en.html) based responses and uses HTTP response codes.
 
