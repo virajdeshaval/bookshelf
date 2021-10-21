@@ -153,12 +153,14 @@ authentication or API keys.</p></li>
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>The API will return five error types when requests fail: - 400 - Bad
-Request: Book ID is not available in database to update rating - 404 -
-Resource Not Found: Request resource does not exists - 405 - method not
-allowed: Method is not allowed on <code class="docutils literal notranslate"><span class="pre">GET</span></code> resource - 406 - Not
-acceptable: Please provide the values in mandatory fields - 422 - Not
-Processable: Your <code class="docutils literal notranslate"><span class="pre">POST</span></code> request cannot be processed</p>
+<p>The API will return five error types when requests fail:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>400 - Bad Request: Book ID is not available in database to update rating
+404 - Resource Not Found: Request resource does not exists
+405 - method not allowed: Method is not allowed on ``GET`` Resource
+406 - Not acceptable: Please provide the values in mandatory fields
+422 - Not Processable: Your ``POST`` request cannot be processed
+</pre></div>
+</div>
 </section>
 <section id="endpoints">
 <h3>Endpoints<a class="headerlink" href="#endpoints" title="Permalink to this headline">¶</a></h3>
