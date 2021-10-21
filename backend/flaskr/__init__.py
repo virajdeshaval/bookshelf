@@ -69,7 +69,7 @@ def add_books():
 
 		# return retrieve_books()
 	except:
-		abort(422)
+		abort(405)
 
 
 def update_books(book_id):
@@ -91,7 +91,7 @@ def update_books(book_id):
 			'id': book.id
 		})
 	except:
-		abort(400)
+		abort(405)
 
 
 def delete_books(book_id):

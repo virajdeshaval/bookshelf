@@ -88,13 +88,13 @@ class BookTestCase(unittest.TestCase):
         self.assertEqual(data['success'], True)
         self.assertEqual(book.format()['rating'], 5)
 
-    def test_400_for_failed_update(self):
+    def test_405_for_failed_update(self):
         res = self.client().patch('/books/7')
         data = json.loads(res.data)
 
-        self.assertEqual(res.status_code, 400)
+        self.assertEqual(res.status_code, 405)
         self.assertEqual(data['success'], False)
-        self.assertEqual(data['message'], 'bad request')
+        self.assertEqual(data['message'], 'method not allowed')
 
     def test_delete_book(self):
         res = self.client().delete('/books/9')
