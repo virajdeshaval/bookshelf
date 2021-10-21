@@ -152,7 +152,7 @@ The API will return five error types when requests fail:
 -  404 --> Resource Not Found: Request resource does not exists 
 -  405 --> method not allowed: Method is not allowed on ``GET`` resource 
 -  406 --> Not acceptable: Please provide the values in mandatory fields 
--  422 --> Not Processable: Your ``POST`` request cannot be processed
+-  422 --> Not Processable: Your ``POST`` request cannot be processed 
 
 Endpoints
 ~~~~~~~~~
