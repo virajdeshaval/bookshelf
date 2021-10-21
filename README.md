@@ -1,7 +1,9 @@
 # The Exceptional Bookshelf for House
 
-This project is a virtual bookshelf for any House. 
+This project is a virtual bookshelf for any House.
+
 `I LOVE to read my books and rate them as per my interest. This is an intresting way to just do that.`
+
 You can, 
 - add your books to the bookshelf, 
 - give a rating, 
